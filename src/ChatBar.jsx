@@ -11,9 +11,9 @@ class ChatBar extends React.Component {
   }
   render() {
     return (
-      <footer className="chatbar">
-        <input className="chatbar-username" placeholder={this.state.username_placeholder}/>
-        <input className="chatbar-message" placeholder={this.state.content_placeholder}/>
+      <footer className='chatbar'>
+        <input className='chatbar-username' placeholder={this.state.username_placeholder}/>
+        <input className='chatbar-message' placeholder={this.state.content_placeholder}/>
       </footer>
     );
   }

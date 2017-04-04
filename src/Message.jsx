@@ -4,12 +4,17 @@ class Message extends React.Component {
   constructor(props) {
     super(props);
     // Anonymous1 should reference a username 
-    const greeting = 'Anonymous1 changed their name to nomnom.';
-    this.state = {greeting};
+        this.state = {
+      username: 'Anonymous1',
+      content: 'I won\'t be impressed with technology until I can download food.'
+    };
   }
   render() {
     return (
-      <div className='message system'>{this.state.greeting}</div>
+      <div className='message'>
+          <span className='message-username'>{this.state.username}</span>
+          <span className='message-content'>{this.state.content}</span>
+        </div>
     );
   }
 }

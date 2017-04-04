@@ -1,4 +1,5 @@
 import React from 'react';
+import Message from './Message.jsx';
 
 class MessageList extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class MessageList extends React.Component {
           <span className='message-username'>{this.state.username}</span>
           <span className='message-content'>{this.state.content}</span>
         </div>
+        <Message/>
       </main>
     );
   }

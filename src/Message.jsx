@@ -9,9 +9,11 @@ class Message extends React.Component {
       content: 'I won\'t be impressed with technology until I can download food.'
     };
   }
+
   render() {
     return (
       <div className='message'>
+          {/*{content}*/}
           <span className='message-username'>{this.state.username}</span>
           <span className='message-content'>{this.state.content}</span>
         </div>

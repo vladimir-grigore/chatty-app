@@ -11,8 +11,8 @@ class App extends Component {
     this.state = {
       username: user || 'Anonymous',
       content: 'I won\'t be impressed with technology until I can download food.',
-      messages: [{user: 'Bob', text: 'Bob says "Jump off a cliff"'}, 
-                 {user: 'Jim', text: 'Back in my time we didn\'t have phones'}]
+      messages: [{id: '1', user: 'Bob', text: 'Bob says "Jump off a cliff"'}, 
+                 {id: '2', user: 'Jim', text: 'Back in my time we didn\'t have phones'}]
     };
   }
 
@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div >
         <Navbar/>
-        <MessageList/>
+        <MessageList messages={this.state.messages}/>
         <ChatBar username={this.state.username} 
         placeholder='Type a message and hit ENTER' />
       </div>

@@ -3,8 +3,8 @@ import React from 'react';
 class Message extends React.Component {
   static get propTypes() { 
     return { 
-      user: React.PropTypes.string,
-      text: React.PropTypes.string
+      username: React.PropTypes.string,
+      content: React.PropTypes.string
     }; 
   }
   constructor(props) {
@@ -18,8 +18,8 @@ class Message extends React.Component {
     return (
       <div className='message'>
           {/*{content}*/}
-          <span className='message-username'>{this.props.user}</span>
-          <span className='message-content'>{this.props.text}</span>
+          <span className='message-username'>{this.props.username}</span>
+          <span className='message-content'>{this.props.content}</span>
         </div>
     );
   }

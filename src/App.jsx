@@ -11,14 +11,36 @@ class App extends Component {
     this.state = {
       username: user || 'Anonymous',
       content: 'I won\'t be impressed with technology until I can download food.',
-      messages: [{id: '1', user: 'Bob', text: 'Bob says "Jump off a cliff"'}, 
-                 {id: '2', user: 'Jim', text: 'Back in my time we didn\'t have phones'}]
+      messages: [{id: 1, username: 'Bob', content: 'Bob says "Jump off a cliff"'}, 
+                 {id: 2, username: 'Jim', content: 'Back in my time we didn\'t have phones'}]
     };
   }
 
-  addMessage(message){
+  // componentDidMount() {
+  //   console.log("componentDidMount <App />");
+  //   setTimeout(() => {
+  //     console.log("Simulating incoming message");
+  //     // Add a new message to the list of messages in the data store
+  //     const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
+  //     let messages = this.state.messages;
+  //     messages.push(newMessage);
+  //     // Update the state of the app component.
+  //     // Calling setState will trigger a call to render() in App and all child components.
+  //     this.setState({messages: messages})
+  //   }, 3000);
+  // }
+
+  addMessage(username, message){
+    // Get a new user id
+    let idsArray = this.state.messages.map((message) => {
+      let arr = [];
+      arr.push(message.id);
+      return arr;
+    });
+    let maxID = Math.max.apply( null, idsArray);
+    let newMessage = {id: maxID + 1, username: username, content: message}
     let MessageList= this.state.messages;
-    MessageList.push(message);
+    MessageList.push(newMessage);
     this.setState({messages: MessageList});
   }
 
@@ -28,7 +50,7 @@ class App extends Component {
         <Navbar/>
         <MessageList messages={this.state.messages}/>
         <ChatBar username={this.state.username} 
-        placeholder='Type a message and hit ENTER' />
+        placeholder='Type a message and hit ENTER' addMessage={this.addMessage}/>
       </div>
     );
   }

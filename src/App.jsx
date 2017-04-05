@@ -7,12 +7,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.addMessage = this.addMessage.bind(this);
-    let user = 'Vlad';
     this.state = {
-      username: user || 'Anonymous',
-      content: 'I won\'t be impressed with technology until I can download food.',
-      messages: [{id: 1, username: 'Bob', content: 'Bob says "Jump off a cliff"'}, 
-                 {id: 2, username: 'Jim', content: 'Back in my time we didn\'t have phones'}]
+      currentUser: {name: 'Anonymous'},
+      messages: []
     };
   }
 
@@ -43,7 +40,7 @@ class App extends Component {
       <div >
         <Navbar/>
         <MessageList messages={this.state.messages}/>
-        <ChatBar username={this.state.username} 
+        <ChatBar username={this.state.currentUser.name} 
         placeholder='Type a message and hit ENTER' addMessage={this.addMessage}/>
       </div>
     );

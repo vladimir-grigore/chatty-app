@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class Message extends React.Component {
+class Message extends Component {
   constructor(props) {
     super(props);
     // Anonymous1 should reference a username 

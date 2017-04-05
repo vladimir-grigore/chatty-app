@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-
-class ChatBar extends React.Component {
+class ChatBar extends Component {
   static get propTypes() { 
     return { 
       username: React.PropTypes.string, 

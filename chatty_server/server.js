@@ -18,7 +18,7 @@ const wss = new SocketServer({ server });
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  ws.on('message', function incoming(message) {
+  ws.on('message', (message) => {
     console.log('received: %s', message);
   });
   ws.send('something');

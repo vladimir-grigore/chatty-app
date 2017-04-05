@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
-import Navbar from './Navbar.jsx';
+import Navbar from './Navbar.jsx'; 
 
 class App extends Component {
   constructor(props) {
@@ -16,19 +16,12 @@ class App extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   console.log("componentDidMount <App />");
-  //   setTimeout(() => {
-  //     console.log("Simulating incoming message");
-  //     // Add a new message to the list of messages in the data store
-  //     const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
-  //     let messages = this.state.messages;
-  //     messages.push(newMessage);
-  //     // Update the state of the app component.
-  //     // Calling setState will trigger a call to render() in App and all child components.
-  //     this.setState({messages: messages})
-  //   }, 3000);
-  // }
+  componentDidMount() {
+      this.socket = new WebSocket('ws://127.0.0.1:3001');
+      this.socket.onopen = () => {
+        console.log('got a connection');
+      }
+  }
 
   addMessage(username, message){
     // Get a new user id

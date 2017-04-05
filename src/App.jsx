@@ -17,10 +17,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-      this.socket = new WebSocket('ws://127.0.0.1:3001');
-      this.socket.onopen = () => {
-        console.log('got a connection');
-      }
+    this.socket = new WebSocket('ws://127.0.0.1:3001');
+    this.socket.onopen = () => {
+      console.log('got a connection');
+    }
   }
 
   addMessage(username, message){
@@ -30,11 +30,12 @@ class App extends Component {
       arr.push(message.id);
       return arr;
     });
-    let maxID = Math.max.apply( null, idsArray);
+    let maxID = Math.max.apply(null, idsArray);
     let newMessage = {id: maxID + 1, username: username, content: message}
     let MessageList= this.state.messages;
     MessageList.push(newMessage);
     this.setState({messages: MessageList});
+    this.socket.send(`User: ${username}, message: ${message}`);
   }
 
   render() {

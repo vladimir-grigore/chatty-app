@@ -4,7 +4,7 @@ import Message from './Message.jsx';
 function NewMessage(props) {
   if (props.username) {
     return(
-      <Message key={props.id} username={props.username} content={props.content} />
+      <Message style={props.color} key={props.id} username={props.username} content={props.content} />
     )
   } else {
     return(
@@ -27,7 +27,7 @@ class MessageList extends React.Component {
   render() {
     return (
       <main className='messages'>
-        {this.props.messages.map((item) => <NewMessage key={item.id} id={item.id}  username={item.username} content={item.content} />)}
+        {this.props.messages.map((item) => <NewMessage key={item.id} id={item.id}  username={item.username} content={item.content} color={item.color}/>)}
       </main>
     );
   }

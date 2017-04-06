@@ -22,6 +22,7 @@ wss.broadcast = (data) => {
     }
   });
 };
+
 function broadcastConnectionNumber(connectionCount){
   let outgoingMessage = {
     type: 'numberOfConnections',
@@ -30,24 +31,36 @@ function broadcastConnectionNumber(connectionCount){
   wss.broadcast(JSON.stringify(outgoingMessage)); 
 }
 
+// Assign colors to each user
+const colors = ['#ABCDEF', '#46aa4c', '#2758dd', '#dd1f1f'];
+let currentColor = {color: colors[Math.floor(Math.random() * colors.length)]};
+let userHasChanged;
+
 function handleMessage(message){
   let outgoingMessage = {}
   const uuidV1 = require('uuid/v1');
+
+  if(userHasChanged) {
+    currentColor = {color: colors[Math.floor(Math.random() * colors.length)]};
+  }
   switch(message.type){
     case 'postMessage':
       outgoingMessage = {
         type: 'incomingMessage',
         id: uuidV1(),
         username: message.username,
-        content: message.content 
+        content: message.content,
+        color: currentColor
       }
+      userHasChanged = false;
       return outgoingMessage;
     case 'postNotification':
       outgoingMessage = {
         type: 'incomingNotification',
         id: uuidV1(),
-        content: message.content 
+        content: message.content,
       }
+      userHasChanged = true;
       return outgoingMessage;
     default:
     // show an error in the console if the message type is unknown
@@ -63,13 +76,9 @@ let sockets = [];
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
-  // Assign the new socket the next ID, then increment the ID
-  // const socketId = nextSocketId;
-  // nextSocketId++;
-  // sockets[socketId] = ws;
+  // Keep track of how many connections are open
   sockets.push(ws);
   broadcastConnectionNumber(sockets.length);
-  // console.log("Current socket", socketId);
 
   ws.on('message', (message) => {
     let incomingMessage = JSON.parse(message);
@@ -80,8 +89,6 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     sockets.pop();
-    // delete sockets[socketId];
-    console.log('Client disconnected');
     broadcastConnectionNumber(sockets.length);
   });
 });

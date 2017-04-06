@@ -9,6 +9,11 @@ body {
   margin: 70px 0;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .chatbar {
   background: tomato;
   border-top: 1px solid black;

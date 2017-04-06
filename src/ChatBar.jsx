@@ -5,12 +5,13 @@ class ChatBar extends Component {
     return { 
       username: React.PropTypes.string,
       placeholder: React.PropTypes.string,
-      addMessage: React.PropTypes.func
+      addMessage: React.PropTypes.func,
+      setUser: React.PropTypes.func
     }; 
   }
   constructor(props) {
     super(props);
-    this.handleEnterPress = this.handleEnterPress.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
     this.setUsername = this.setUsername.bind(this);
@@ -21,10 +22,10 @@ class ChatBar extends Component {
   }
 
   // onKeyPress is used to listen for Enter keypress
-  handleEnterPress(event){
+  sendMessage(event){
     if(event.key == 'Enter'){
       this.props.addMessage(this.state.username, this.state.value);
-      this.setState({username: '', value: ''});
+      this.setState({value: ''});
     }
   }
 
@@ -53,7 +54,7 @@ class ChatBar extends Component {
         placeholder={this.props.username} onKeyPress={this.setUsername} onChange={this.changeUsername}/>
         <input className='chatbar-message' 
         value={this.state.value}
-        placeholder={this.props.placeholder} onKeyPress={this.handleEnterPress} onChange={this.handleKeyDown}/>
+        placeholder={this.props.placeholder} onKeyPress={this.sendMessage} onChange={this.handleKeyDown}/>
       </footer>
     );
   }

@@ -8,8 +8,9 @@ class App extends Component {
     super(props);
     this.addMessage = this.addMessage.bind(this);
     this.displayMeessage = this.displayMeessage.bind(this);
+    this.setUser = this.setUser.bind(this);
     this.state = {
-      currentUser: {name: 'Anonymous'},
+      currentUser: 'Anonymous',
       messages: []
     };
   }
@@ -54,6 +55,10 @@ class App extends Component {
     }));
   }
 
+  setUser(username){
+    this.setState({currentUser: username});
+  }
+
   displayMeessage(id, username, message){
     let newMessage = {id: id, username: username, content: message}
     let MessageList = this.state.messages;
@@ -66,8 +71,8 @@ class App extends Component {
       <div >
         <Navbar/>
         <MessageList messages={this.state.messages}/>
-        <ChatBar username={this.state.currentUser.name} 
-        placeholder='Type a message and hit ENTER' addMessage={this.addMessage}/>
+        <ChatBar username={this.state.currentUser} 
+        placeholder='Type a message and hit ENTER' addMessage={this.addMessage} setUser={this.setUser}/>
       </div>
     );
   }

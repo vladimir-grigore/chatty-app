@@ -13,6 +13,7 @@ class ChatBar extends Component {
     this.handleEnterPress = this.handleEnterPress.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
+    this.setUsername = this.setUsername.bind(this);
     this.state = {
       username: '',
       value: ''
@@ -36,13 +37,20 @@ class ChatBar extends Component {
   changeUsername(event){
     this.setState({username: event.target.value});
   }
+
+  // Set the user in this.props.currentUser
+  setUsername(event){
+    if(event.key == 'Enter'){
+      this.props.setUser(this.state.username);
+    }
+  }
   
   render() {
     return (
       <footer className='chatbar'>
         <input className='chatbar-username' 
         value={this.state.username}
-        placeholder={this.props.username} onChange={this.changeUsername}/>
+        placeholder={this.props.username} onKeyPress={this.setUsername} onChange={this.changeUsername}/>
         <input className='chatbar-message' 
         value={this.state.value}
         placeholder={this.props.placeholder} onKeyPress={this.handleEnterPress} onChange={this.handleKeyDown}/>

@@ -16,10 +16,24 @@ class App extends Component {
 
   componentDidMount() {
     this.socket = new WebSocket('ws://127.0.0.1:3001');
-    this.socket.onopen = () => {}
+    this.socket.onopen = (event) => {
+      console.log("Connected to server");
+    }
     this.socket.onmessage = (messageEvent) => {
       const message = JSON.parse(messageEvent.data);
       this.displayMeessage(message.id, message.username, message.message);
+
+      switch(message.data){
+        case "incomingMessage":
+        // handle incoming message
+          break;
+        case "incomingNotification":
+          // handle incoming notification
+          break;
+        default:
+          // show an error in the console if the message type is unknown
+          throw new Error("Unknown event type " + message.type);
+      }
     }
   }
 

@@ -7,6 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.addMessage = this.addMessage.bind(this);
+    this.displayMeessage = this.displayMeessage.bind(this);
     this.state = {
       currentUser: {name: 'Anonymous'},
       messages: []
@@ -15,24 +16,35 @@ class App extends Component {
 
   componentDidMount() {
     this.socket = new WebSocket('ws://127.0.0.1:3001');
-    this.socket.onopen = () => {
-      console.log('got a connection');
+    this.socket.onopen = () => {}
+    this.socket.onmessage = (messageEvent) => {
+      const message = JSON.parse(messageEvent.data);
+      this.displayMeessage(message.id, message.username, message.message);
     }
   }
 
   addMessage(username, message){
     // Get a new user id
-    let idsArray = this.state.messages.map((message) => {
-      let arr = [];
-      arr.push(message.id);
-      return arr;
-    });
-    let maxID = Math.max.apply(null, idsArray);
-    let newMessage = {id: maxID + 1, username: username, content: message}
-    let MessageList= this.state.messages;
+    const uuidV1 = require('uuid/v1');
+
+    // Set user to Anonymous id user field was empty
+    if (!username) {
+      username = this.state.currentUser.name;
+    }
+
+    // Send the message to the server
+    this.socket.send(JSON.stringify({
+      id: uuidV1(), 
+      username: username, 
+      message: message
+    }));
+  }
+
+  displayMeessage(id, username, message){
+    let newMessage = {id: id, username: username, content: message}
+    let MessageList = this.state.messages;
     MessageList.push(newMessage);
     this.setState({messages: MessageList});
-    this.socket.send(`User: ${username}, message: ${message}`);
   }
 
   render() {

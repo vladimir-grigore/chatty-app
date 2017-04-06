@@ -10,7 +10,7 @@ class ChatBar extends Component {
   }
   constructor(props) {
     super(props);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleEnterPress = this.handleEnterPress.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
     this.state = {
@@ -20,7 +20,7 @@ class ChatBar extends Component {
   }
 
   // onKeyPress is used to listen for Enter keypress
-  handleKeyPress(event){
+  handleEnterPress(event){
     if(event.key == 'Enter'){
       this.props.addMessage(this.state.username, this.state.value);
       this.setState({username: '', value: ''});
@@ -45,7 +45,7 @@ class ChatBar extends Component {
         placeholder={this.state.username || 'Anonymous'} onChange={this.changeUsername}/>
         <input className='chatbar-message' 
         value={this.state.value}
-        placeholder={this.props.placeholder} onKeyPress={this.handleKeyPress} onChange={this.handleKeyDown}/>
+        placeholder={this.props.placeholder} onKeyPress={this.handleEnterPress} onChange={this.handleKeyDown}/>
       </footer>
     );
   }

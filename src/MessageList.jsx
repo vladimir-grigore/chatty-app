@@ -1,8 +1,21 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Message from './Message.jsx';
-import SystemMessage from './SystemMessage.jsx';
 
-class MessageList extends Component {
+function NewMessage(props) {
+  if (props.username) {
+    return(
+      <Message key={props.id} username={props.username} content={props.content} />
+    )
+  } else {
+    return(
+      <div className="message system">
+        {props.content}
+      </div>
+    )
+  }
+}
+
+class MessageList extends React.Component {
   static get propTypes() { 
     return { 
       messages: React.PropTypes.array
@@ -14,8 +27,7 @@ class MessageList extends Component {
   render() {
     return (
       <main className='messages'>
-        {this.props.messages.map((item) => <Message key={item.id} username={item.username} content={item.content} />)}
-        <SystemMessage/>
+        {this.props.messages.map((item) => <NewMessage key={item.id} id={item.id}  username={item.username} content={item.content} />)}
       </main>
     );
   }

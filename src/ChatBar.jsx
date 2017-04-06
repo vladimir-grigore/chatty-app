@@ -24,7 +24,7 @@ class ChatBar extends Component {
   // onKeyPress is used to listen for Enter keypress
   sendMessage(event){
     if(event.key == 'Enter'){
-      this.props.addMessage(this.state.username, this.state.value);
+      this.props.addMessage(this.state.value);
       this.setState({value: ''});
     }
   }

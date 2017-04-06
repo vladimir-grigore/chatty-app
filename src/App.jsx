@@ -12,7 +12,8 @@ class App extends Component {
     this.setUser = this.setUser.bind(this);
     this.state = {
       currentUser: 'Anonymous',
-      messages: []
+      messages: [],
+      connections: 0
     };
   }
 
@@ -22,6 +23,10 @@ class App extends Component {
     this.socket.onmessage = (messageEvent) => {
       const message = JSON.parse(messageEvent.data);
       switch(message.type){
+        case 'numberOfConnections':
+          console.log("numberOfConnections", message.connections);
+          this.setState({connections: message.connections});
+          break;
         case 'incomingMessage':
         this.displayUserMessage(message.id, message.username, message.content);
           break;
@@ -69,7 +74,7 @@ class App extends Component {
   render() {
     return (
       <div >
-        <Navbar/>
+        <Navbar connections={this.state.connections}/>
         <MessageList messages={this.state.messages}/>
         <ChatBar username={this.state.currentUser} 
         placeholder='Type a message and hit ENTER' addMessage={this.addMessage} setUser={this.setUser}/>

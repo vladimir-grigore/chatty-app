@@ -9,7 +9,6 @@ class Message extends Component {
   }
   constructor(props) {
     super(props);
-    // Anonymous1 should reference a username 
     this.state = {
     };
   }

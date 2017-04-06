@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class ChatBar extends Component {
   static get propTypes() { 
     return { 
-      username: React.PropTypes.string, 
+      username: React.PropTypes.string,
       placeholder: React.PropTypes.string,
       addMessage: React.PropTypes.func
     }; 
@@ -42,7 +42,7 @@ class ChatBar extends Component {
       <footer className='chatbar'>
         <input className='chatbar-username' 
         value={this.state.username}
-        placeholder={this.state.username || 'Anonymous'} onChange={this.changeUsername}/>
+        placeholder={this.props.username} onChange={this.changeUsername}/>
         <input className='chatbar-message' 
         value={this.state.value}
         placeholder={this.props.placeholder} onKeyPress={this.handleEnterPress} onChange={this.handleKeyDown}/>

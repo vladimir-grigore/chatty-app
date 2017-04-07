@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
-import Navbar from './Navbar.jsx'; 
+import Navbar from './Navbar.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class App extends Component {
     // Send the message to the server
     this.socket.send(JSON.stringify({
       type: 'postMessage',
-      username: this.state.currentUser, 
+      username: this.state.currentUser,
       content: message
     }));
   }

@@ -69,7 +69,6 @@ function handleMessage(message){
 }
 
 // Use a sequence of unique IDs for every socket
-// let nextSocketId = 0;
 let sockets = [];
 
 // Set up a callback that will run when a client connects to the server

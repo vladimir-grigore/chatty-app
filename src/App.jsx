@@ -27,8 +27,8 @@ class App extends Component {
           this.setState({connections: message.connections});
           break;
         case 'incomingMessage':
-        this.displayUserMessage(message.id, message.username, 
-        message.content, message.color);
+          this.displayUserMessage(message.id, message.username, 
+          message.content, message.color);
           break;
         case 'incomingNotification':
           this.displaySystemMeessage(message.id, message.content);
@@ -65,7 +65,7 @@ class App extends Component {
   }
 
   displayUserMessage(id, username, message, color){
-    let newMessage = {id: id, username: username, content: message, color: color}
+    let newMessage = {id, username, content: message, color}
     let MessageList = this.state.messages;
     MessageList.push(newMessage);
     this.setState({messages: MessageList});

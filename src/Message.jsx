@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 
+CustomContent.propTypes = {
+  content: React.PropTypes.string
+}
+
 function CustomContent(props) {
   let imageChecker = /([a-z\-_0-9\/\:\.]*\.jpg|jpeg|png|gif)/i;
-  // console.log("props.content:", props.content)
-  // console.log("CHECKER_exec:", imageChecker.test(props.content));
-
+  // Create an image tag if user enters an image url
   if(imageChecker.test(props.content)){
-    return(
-      <img src={props.content}/>
-    )
+    return(<img src={props.content}/>);
   } else {
     return(
       <div>{props.content}</div>
@@ -26,10 +26,7 @@ class Message extends Component {
   }
   constructor(props) {
     super(props);
-    this.state = {
-    };
   }
-
   render() {
     return (
       <div className='message'>

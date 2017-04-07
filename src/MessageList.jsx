@@ -1,17 +1,23 @@
 import React from 'react';
 import Message from './Message.jsx';
 
+NewMessage.propTypes = {
+  username: React.PropTypes.string,
+  color: React.PropTypes.object,
+  id: React.PropTypes.string,
+  content: React.PropTypes.string
+}
+
+// Differentiate between user messages and system messages
 function NewMessage(props) {
   if (props.username) {
     return(
       <Message style={props.color} key={props.id} username={props.username} content={props.content} />
-    )
+    );
   } else {
     return(
-      <div className="message system">
-        {props.content}
-      </div>
-    )
+      <div className="message system">{props.content}</div>
+    );
   }
 }
 
